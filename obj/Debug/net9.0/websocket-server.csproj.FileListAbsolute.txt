@@ -33,3 +33,4 @@ C:\Users\Sefzz\Documents\Visual Studio Code Projects\websocket-server\obj\Debug\
 C:\Users\Sefzz\Documents\Visual Studio Code Projects\websocket-server\obj\Debug\net9.0\websocket-server.pdb
 C:\Users\Sefzz\Documents\Visual Studio Code Projects\websocket-server\obj\Debug\net9.0\websocket-server.genruntimeconfig.cache
 C:\Users\Sefzz\Documents\Visual Studio Code Projects\websocket-server\obj\Debug\net9.0\ref\websocket-server.dll
+C:\Users\Sefzz\Documents\Visual Studio Code Projects\websocket-server\obj\Debug\net9.0\websocket-server.sourcelink.json
