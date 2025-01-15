@@ -46,4 +46,5 @@ app.MapHub<ChatHub>("/chatHub").RequireCors("AllowFrontend");  // Ensure the Sig
 
 // Make sure the app listens on all IP addresses for remote access
 // app.Run("http://192.168.1.180:5001");  //ektelesh me prosvash pou mporoun na ftasoun stin ip 192.168.1.180
-app.Run();
+// app.Run();
+app.Run("http://localhost:5001");

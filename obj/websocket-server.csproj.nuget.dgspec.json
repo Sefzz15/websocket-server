@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\arsse\\Documents\\VisualStudioProjects\\websocket-server\\websocket-server.csproj": {}
+    "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\arsse\\Documents\\VisualStudioProjects\\websocket-server\\websocket-server.csproj": {
+    "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\arsse\\Documents\\VisualStudioProjects\\websocket-server\\websocket-server.csproj",
+        "projectUniqueName": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj",
         "projectName": "websocket-server",
-        "projectPath": "C:\\Users\\arsse\\Documents\\VisualStudioProjects\\websocket-server\\websocket-server.csproj",
-        "packagesPath": "C:\\Users\\arsse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\arsse\\Documents\\VisualStudioProjects\\websocket-server\\obj\\",
+        "projectPath": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj",
+        "packagesPath": "C:\\Users\\Sefzz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\arsse\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Sefzz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
