@@ -2102,25 +2102,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sefzz\\.nuget\\packages\\": {}
+    "C:\\Users\\Serafim Arseniou\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj",
+      "projectUniqueName": "C:\\Users\\Serafim Arseniou\\Documents\\VisualStudioCodeProjects\\websocket-server\\websocket-server.csproj",
       "projectName": "websocket-server",
-      "projectPath": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\websocket-server.csproj",
-      "packagesPath": "C:\\Users\\Sefzz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sefzz\\Documents\\Visual Studio Code Projects\\websocket-server\\obj\\",
+      "projectPath": "C:\\Users\\Serafim Arseniou\\Documents\\VisualStudioCodeProjects\\websocket-server\\websocket-server.csproj",
+      "packagesPath": "C:\\Users\\Serafim Arseniou\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Serafim Arseniou\\Documents\\VisualStudioCodeProjects\\websocket-server\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Sefzz\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Serafim Arseniou\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://pkgs.dev.azure.com/vianair/_packaging/Vianair_Feed%40Local/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
@@ -2138,7 +2147,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -2172,8 +2181,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://pkgs.dev.azure.com/vianair/_packaging/Vianair_Feed%40Local/nuget/v3/index.json."
+    }
+  ]
 }

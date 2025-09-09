@@ -4,31 +4,52 @@ public class ChatHub : Hub
 {
     private static List<string> connectedUsers = new List<string>();
 
-    // Όταν συνδέεται ένας χρήστης
     public async Task UserConnected(string username)
     {
         if (!connectedUsers.Contains(username))
         {
             connectedUsers.Add(username);
-            await Clients.All.SendAsync("UserConnected", username); // Στέλνουμε στους clients τη νέα σύνδεση
-            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Ενημερώνουμε τη λίστα των συνδεδεμένων χρηστών
+            await Clients.All.SendAsync("UserConnected", username); // Send notification to all users
+            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Update the list of connected users
         }
     }
 
-    // Όταν αποσυνδέεται ένας χρήστης
     public async Task UserDisconnected(string username)
     {
         if (connectedUsers.Contains(username))
         {
             connectedUsers.Remove(username);
-            await Clients.All.SendAsync("UserDisconnected", username); // Ενημερώνουμε τους χρήστες για την αποσύνδεση
-            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Ενημερώνουμε τη λίστα των συνδεδεμένων χρηστών
+            await Clients.All.SendAsync("UserDisconnected", username); // Send notification to all users
+            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Update the list of connected users
         }
     }
 
-    // Αποστολή μηνύματος
     public async Task SendMessage(string user, string message)
     {
         await Clients.All.SendAsync("ReceiveMessage", user, message);
     }
+
+    public async Task JoinGroup(string username, string groupName)
+    {
+        if (string.IsNullOrWhiteSpace(groupName)) return;
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+        await Clients.Group(groupName).SendAsync("UserJoinedGroup", username, groupName);
+    }
+
+    public async Task LeaveGroup(string username, string groupName)
+    {
+        if (string.IsNullOrWhiteSpace(groupName)) return;
+
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+        await Clients.Group(groupName).SendAsync("UserLeftGroup", username, groupName);
+    }
+
+    public async Task SendMessageToGroup(string user, string message, string groupName)
+    {
+        if (string.IsNullOrWhiteSpace(groupName)) return;
+        await Clients.Group(groupName).SendAsync("ReceiveMessage", user, message);
+    }
+
+
 }
