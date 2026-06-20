@@ -1,37 +1,60 @@
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
+using System.Collections.Concurrent;
+
 public class ChatHub : Hub
 {
-    private static List<string> connectedUsers = new List<string>();
+    // ConnectionId -> username. A user counts as connected while they have at least one
+    // live connection, so refreshes and multiple tabs don't create or drop "ghost" users.
+    private static readonly ConcurrentDictionary<string, string> connections = new();
     private static HashSet<string> groups = new HashSet<string>(); // store group names
+
+    private static List<string> ConnectedUsers() => connections.Values.Distinct().ToList();
 
     public async Task UserConnected(string username)
     {
-        if (!connectedUsers.Contains(username))
-        {
-            connectedUsers.Add(username);
+        bool isNewUser = !connections.Values.Contains(username);
+        connections[Context.ConnectionId] = username;
 
-            await Clients.Caller.SendAsync("ReceiveGroups", groups);
-            await Clients.All.SendAsync("UserConnected", username); // Send notification to all users
-            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Update the list of connected users
+        // Always sync the caller with the current state. This is what lets a refreshing
+        // or reconnecting user see everyone who is already online.
+        await Clients.Caller.SendAsync("ReceiveGroups", groups);
+        await Clients.Caller.SendAsync("ReceiveConnectedUsers", ConnectedUsers());
+
+        if (isNewUser)
+        {
+            await Clients.Others.SendAsync("UserConnected", username); // notify everyone else
         }
+
+        await Clients.All.SendAsync("ReceiveConnectedUsers", ConnectedUsers());
     }
 
-    public async Task UserDisconnected(string username)
+    public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        if (connectedUsers.Contains(username))
+        // Runs whenever a socket drops (refresh, tab close, crash) — no longer relies on
+        // the client to announce its own disconnect.
+        if (connections.TryRemove(Context.ConnectionId, out var username))
         {
-            connectedUsers.Remove(username);
-            await Clients.All.SendAsync("UserDisconnected", username); // Send notification to all users
-            await Clients.All.SendAsync("ReceiveConnectedUsers", connectedUsers); // Update the list of connected users
-            await Clients.Caller.SendAsync("ReceiveGroups", groups); // send groups to new user
+            // Only announce departure once the user's last connection is gone.
+            if (!connections.Values.Contains(username))
+            {
+                await Clients.All.SendAsync("UserDisconnected", username);
+            }
+            await Clients.All.SendAsync("ReceiveConnectedUsers", ConnectedUsers());
         }
+
+        await base.OnDisconnectedAsync(exception);
     }
+
+    // Disconnection is handled automatically by OnDisconnectedAsync now. Kept as a no-op
+    // so the client's existing ngOnDestroy invoke doesn't error; the subsequent connection
+    // close is what actually removes the user.
+    public Task UserDisconnected(string username) => Task.CompletedTask;
 
     public async Task SendMessage(string user, string message)
     {
         await Clients.All.SendAsync("ReceiveMessage", user, message);
     }
+
     public Task<List<string>> GetGroups()
     {
         return Task.FromResult(groups.ToList());
